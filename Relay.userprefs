@@ -1,17 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Relay/src/RelayTwo.cs">
-    <Files>
-      <File FileName="Relay_Tests/tests/RelayTwoTests.cs" Line="453" Column="5" />
-      <File FileName="Relay/src/TableTwo.cs" Line="1" Column="1" />
-      <File FileName="Relay/src/RelayTwo.cs" Line="120" Column="30" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="GameTypes" selected="True" />
-          <Node name="Relay" expanded="True">
+          <Node name="GameTypes" expanded="True">
             <Node name="src" expanded="True" />
+          </Node>
+          <Node name="Relay" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="TableTwo.cs" selected="True" />
+            </Node>
           </Node>
           <Node name="Relay_Tests" expanded="True">
             <Node name="tests" expanded="True" />
