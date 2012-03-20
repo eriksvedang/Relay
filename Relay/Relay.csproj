@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,7 +12,6 @@
     <AssemblyName>Relay</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Description>A database.</Description>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,9 +55,6 @@
     <Compile Include="src\RelayObjectTwo.cs" />
     <Compile Include="src\ValueEntry.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="tests\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -67,11 +63,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <None Include="doc\notes">
-      <Gettext-ScanForTranslations>false</Gettext-ScanForTranslations>
-    </None>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GameTypes\GameTypes\GameTypes.csproj">
       <Project>{EC63C4E3-C5B8-4EB1-90CD-2D2FC17801BD}</Project>
