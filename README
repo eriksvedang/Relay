@@ -2,4 +2,4 @@ Relay is a simple database implemented in C# by Erik Sved√§ng and Johannes Gotl√
 
 We use it as the underlying technology for several parts of the game we're building. It enables easy saving and loading of the complete state of systems like entity management, story, etc.
 
-The project works in both Visual Studio and Mono Develop. The unit tests are written with NUnit.
+The project should work in both Visual Studio and Mono Develop. The unit tests are written for NUnit.
