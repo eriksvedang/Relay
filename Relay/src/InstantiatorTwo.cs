@@ -38,7 +38,7 @@ namespace RelayLib
         public static List<T> Process<T>(TableTwo pTable, Type[] pSubTypes) where T : RelayObjectTwo
         {
             Type[] subTypes = pSubTypes;
-            int[] objectIds = pTable.GetIndexesOfPopulatedRows();
+            //int[] objectIds = pTable.GetIndexesOfPopulatedRows();
              List<T> newInstances = new List<T>();
             foreach (TableRow tr in pTable)
             {
