@@ -1,0 +1,53 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Relay/src/RelayTwo.cs">
+    <Files>
+      <File FileName="../../../../Desktop/OldScripts/RoomChanger.cs" Line="132" Column="35" />
+      <File FileName="Relay_Tests/tests/RelayTwoTests.cs" Line="453" Column="5" />
+      <File FileName="Relay/src/TableTwo.cs" Line="20" Column="1" />
+      <File FileName="Relay/src/RelayTwo.cs" Line="209" Column="7" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Relay" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="RelayTwo.cs" selected="True" />
+            </Node>
+          </Node>
+          <Node name="Relay_Tests" expanded="True">
+            <Node name="tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="Relay_Tests" expanded="True">
+            <Node name="Relay_Tests" expanded="True">
+              <Node name="tests" expanded="True">
+                <Node name="InstantiatorTest" expanded="True" />
+                <Node name="RelayTwoTests" expanded="True">
+                  <Node name="MergeSavesWithDifferentFields" selected="True" />
+                </Node>
+                <Node name="TableTwoTests" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
