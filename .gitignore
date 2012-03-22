@@ -5,7 +5,8 @@
 *.userprefs
 *.json
 *.xml
-test-results
+*.userprefs
 
+test-results
 Debug/
 Release/
