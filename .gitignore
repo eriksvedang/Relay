@@ -6,3 +6,6 @@
 *.json
 *.xml
 test-results
+
+Debug/
+Release/
