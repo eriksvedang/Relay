@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.IO;
+
 namespace RelayLib
 {
       
     public interface ITableField
     {
-     
-        string name { get;}
-        Type type { get;}
+        string name { get; }
+        Type type { get; }
         int rowCount { get; set; }
         void ClearEntryAtRow(int pIndex);
 
@@ -37,12 +37,14 @@ namespace RelayLib
             type = typeof(T);
             name = pName;   
         }
-        public void ClearEntryAtRow(int pRow)
+       
+		public void ClearEntryAtRow(int pRow)
         {
-            Console.WriteLine("Clearing entry at row" + pRow);
+            //Console.WriteLine("Clearing entry at row" + pRow);
             entries[pRow] = null;
         }
-        public string GetValueAsString(int pRow)
+      
+		public string GetValueAsString(int pRow)
         {
             if (entries[pRow] != null)
             {
@@ -60,6 +62,7 @@ namespace RelayLib
                 return TableTwo.NULL_TOKEN;
             }
         }
+		
         public void SetValueFromString(int pRow, string pValue)
         {
             if (pValue == TableTwo.NULL_TOKEN)
@@ -78,6 +81,7 @@ namespace RelayLib
                 jr.Close();
             }
         }
+		
         public int rowCount
         {
             get { return entries.Count; }

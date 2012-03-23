@@ -145,10 +145,9 @@ namespace RelayLib
         /// Append all entries in all tables, source IDs will be discarded.
         /// </summary>
         public void AppendTables(RelayTwo pRelay)
-        {
-
+		{
             RelayTwo additiveRelay = pRelay;
-            //cycle through all new tables in the loaded realy
+            //cycle through all new tables in the loaded relay
             foreach (String tableName in additiveRelay.tables.Keys)
             {
                 TableTwo fromTable = additiveRelay.tables[tableName];
@@ -178,6 +177,7 @@ namespace RelayLib
                 }
             }
         }
+		
 		/// <summary>
         /// Append all entries in all tables, source IDs will be discarded.
         /// </summary>
