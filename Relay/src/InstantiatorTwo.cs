@@ -6,15 +6,28 @@ using GameTypes;
 namespace RelayLib
 {	
 	public class InstantiatorTwo
-        
 	{
-        public static Type[] GetSubclasses( Type baseType )
+        public static Type[] GetSubclasses(Type baseType)
         {
             List<Type> subTypes = new List<Type>();
-            List<Type> tmp = new List<Type>();
-            foreach (Assembly assm in AppDomain.CurrentDomain.GetAssemblies())
-                tmp.AddRange(assm.GetTypes());
-            Type[] allTypes = tmp.ToArray();
+            List<Type> temp = new List<Type>();
+
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+                try {
+                    if(assembly.GetName().Name.Contains("NUnit")) {
+                        continue;
+                    }
+                    temp.AddRange(assembly.GetTypes());
+                }
+                catch(ReflectionTypeLoadException) {
+                    Console.WriteLine("There was an error loading the assembly " + assembly.FullName + " ");
+                    /*foreach(var loaderException in e.LoaderExceptions) {
+                        Console.WriteLine(loaderException.Message);
+                    }*/
+                }
+            }
+
+            Type[] allTypes = temp.ToArray();
 
             for (int i = 0; i < allTypes.Length; i++)
             {
@@ -28,24 +41,29 @@ namespace RelayLib
             subTypes.Add(baseType);
             return subTypes.ToArray();
         }
+
         public static Type GetType(string pName, Type[] pTypeCollection)
         {
-            foreach (Type type in pTypeCollection)
-                if (type.Name == pName)
-                    return type;
+            foreach (Type type in pTypeCollection) {
+                if (type.Name == pName) {
+                   return type;
+                }
+            }
             return null;
         }
+
         public static List<T> Process<T>(TableTwo pTable, Type[] pSubTypes) where T : RelayObjectTwo
         {
             Type[] subTypes = pSubTypes;
-            //int[] objectIds = pTable.GetIndexesOfPopulatedRows();
-             List<T> newInstances = new List<T>();
+            List<T> newInstances = new List<T>();
+
             foreach (TableRow tr in pTable)
             {
                 string className = tr.Get<string>(RelayObjectTwo.CSHARP_CLASS_FIELD_NAME);
                 Type type = GetType(className, subTypes);
-                if (type == null)
+                if (type == null) {
                     throw new CantFindClassWithNameException("Can't find class with name " + className + " to instantiate");
+                }
                 T newInstance = Activator.CreateInstance(type) as T;
                 D.isNull(newInstance);
                 newInstance.LoadFromExistingRelayEntry(pTable, tr.row, className);
@@ -54,15 +72,18 @@ namespace RelayLib
 
             return newInstances;
         }
+
         public static List<T> Process<T>(TableTwo pTable, Type pType) where T : RelayObjectTwo
         {
             Type[] subTypes = GetSubclasses(pType);
             return Process<T>(pTable, subTypes);
         }
+
         public static List<T> Process<T>(TableTwo pTable) where T : RelayObjectTwo
 		{
             return Process<T>(pTable, typeof(T));
 		}
+
         public static T Create<T>(TableTwo pTable) where T : RelayObjectTwo
         {
             Type t = typeof(T);
