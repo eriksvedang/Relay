@@ -104,20 +104,80 @@ namespace RelayLib
             while (!sw.EndOfStream) {
                 string tableName = sw.ReadLine();
                 int tableCount = Convert.ToInt32(sw.ReadLine());
+
+#if PRINT_TIME_DATA
+                //DateTime deserializeStartTime = DateTime.Now;
+#endif
+
                 string[] fieldNames = JsonConvert.DeserializeObject<string[]>(sw.ReadLine());
                 string[] typeNames = JsonConvert.DeserializeObject<string[]>(sw.ReadLine());
+
+#if PRINT_TIME_DATA
+                //TimeSpan deserializeSpan = DateTime.Now - deserializeStartTime;
+                //Console.WriteLine("Deserializing line took " + deserializeSpan.TotalSeconds + " seconds");
+
+                //DateTime restStartTime = DateTime.Now;
+#endif
+
+                #if PRINT_TIME_DATA
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                #endif
 
                 TableTwo newTable = new TableTwo(tableName);
                 AddFieldsToTable(newTable, fieldNames, typeNames);
 
+                #if PRINT_TIME_DATA
+                stopwatch.Stop();
+                Console.WriteLine("AddFieldsToTable: " + stopwatch.ElapsedMilliseconds);
+                stopwatch.Reset();
+                stopwatch.Start();
+                #endif
+
                 for (int i = 0; i < tableCount; i++) {
+
+                    #if PRINT_TIME_DATA
+                    stopwatch.Reset();
+                    stopwatch.Start();
+                    #endif
+
                     SerializableTableRow r = JsonConvert.DeserializeObject<SerializableTableRow>(sw.ReadLine());
-                    if (r.row >= newTable.capacity)
+
+                    #if PRINT_TIME_DATA
+                    stopwatch.Stop();
+                    Console.WriteLine("DeserializeObject: " + stopwatch.ElapsedMilliseconds);
+
+                    stopwatch.Reset();
+                    stopwatch.Start();
+                    #endif
+
+                    if (r.row >= newTable.capacity) {
                         newTable.SetCapacity(r.row + 1);
+                    }
+
+                    #if PRINT_TIME_DATA
+                    stopwatch.Stop();
+                    Console.WriteLine("SetCapacity: " + stopwatch.ElapsedMilliseconds);
+                    
+                    stopwatch.Reset();
+                    stopwatch.Start();
+                    #endif
+
                     r.InsertToTable(newTable);
+
+                    #if PRINT_TIME_DATA
+                    stopwatch.Stop();
+                    Console.WriteLine("InsertToTable: " + stopwatch.ElapsedMilliseconds);
+                    #endif
                 }
 
                 tables.Add(newTable.name, newTable);
+
+#if PRINT_TIME_DATA
+                //TimeSpan restSpan = DateTime.Now - restStartTime;
+                //Console.WriteLine("Rest took " + restSpan.TotalSeconds + " seconds");
+#endif
+
                 yield return ((float)sw.BaseStream.Position) / ((float)sw.BaseStream.Length);
             }
 
