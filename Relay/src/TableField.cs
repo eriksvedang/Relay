@@ -7,7 +7,6 @@ using System.IO;
 
 namespace RelayLib
 {
-      
     public interface ITableField
     {
         string name { get; }
@@ -44,16 +43,16 @@ namespace RelayLib
             entries[pRow] = null;
         }
       
+        static JsonSerializer _serializer = JsonSerializer.Create(new JsonSerializerSettings());
+
 		public string GetValueAsString(int pRow)
         {
             if (entries[pRow] != null)
             {
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                JsonSerializer s = JsonSerializer.Create(settings);
                 StringWriter sb = new StringWriter();
                 JsonTextWriter tw = new JsonTextWriter(sb);
                 tw.Formatting = Formatting.None;
-                s.Serialize(tw, entries[pRow].data);
+                _serializer.Serialize(tw, entries[pRow].data);
                 tw.Close();
                 return sb.ToString();
             }
