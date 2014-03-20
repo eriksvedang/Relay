@@ -13,13 +13,13 @@ namespace RelayLib
     {
         public int row;
         public string[] values;
+
         public void InsertToTable(TableTwo pTable)
         {
             pTable._usedRows[row] = true;
             TableRow tr = pTable.GetRow(row);
             tr.valuesAsStrings = values;
         }
-
     }
 	
     public struct TableRow
@@ -87,6 +87,7 @@ namespace RelayLib
         {
             name = pName;
         }
+
         public void EnsureField<T>(string pFieldName)
         {
             if (!_fields.ContainsKey(pFieldName))
@@ -94,6 +95,7 @@ namespace RelayLib
                 AddField<T>(pFieldName);
             }
         }
+
         public ValueEntry<T> GetValueEntryEnsureDefault<T>(int pRow, string pFieldName, T pDefaultValue)
         {
             EnsureField<T>(pFieldName);
@@ -116,10 +118,6 @@ namespace RelayLib
             }
             return (_fields[pFieldName] as TableField<T>).entries[pRow];
         }
-        
-
-
-
 
         public void AddField<T>(string pFieldName) 
         { 
@@ -165,10 +163,12 @@ namespace RelayLib
             }
             field.entries[pRow].data = pValue;
         }
+
         public T GetValue<T>(int pRow, string pFieldName)
         {
             return GetValueEntry<T>(pRow, pFieldName).data;
         }
+
         public ValueEntry<T> GetValueEntry<T>(int pRow, string pFieldName)
         {
 #if DEBUG
@@ -192,6 +192,7 @@ namespace RelayLib
 #endif
             return (_fields[pFieldName] as TableField<T>).entries[pRow];
         }
+
         public string GetStringValue(int pRow, string pFieldName)
         {
 #if DEBUG
@@ -202,8 +203,6 @@ namespace RelayLib
 #endif
             return _fields[pFieldName].GetValueAsString(pRow);
         }
-
-
 		
         /// <summary>
         /// Adds a new Row, increases the capacity in all fields.
@@ -214,11 +213,13 @@ namespace RelayLib
         {
             TableRow result;
             int freeIndex = GetOneFreeIndex();
+
             if (freeIndex == -1 )
             {
                 freeIndex = _capacity;
                 SetCapacity(_capacity + 1);
             }
+
             _usedRows[freeIndex] = true;
             result = new TableRow(this, freeIndex);
 #if DEBUG
