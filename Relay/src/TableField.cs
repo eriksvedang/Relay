@@ -61,7 +61,10 @@ namespace RelayLib
                 return TableTwo.NULL_TOKEN;
             }
         }
-		
+
+        static JsonSerializerSettings settings = new JsonSerializerSettings();
+        static JsonSerializer jsonSerializer = JsonSerializer.Create(settings);
+
         public void SetValueFromString(int pRow, string pValue)
         {
             if (pValue == TableTwo.NULL_TOKEN)
@@ -70,14 +73,13 @@ namespace RelayLib
             }
             else
             {
-                if (entries[pRow] == null)
+                if (entries[pRow] == null) {
                     entries[pRow] = new ValueEntry<T>();
+                }
 
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                JsonSerializer s = JsonSerializer.Create(settings);
-                JsonTextReader jr = new JsonTextReader(new StringReader(pValue));
-                entries[pRow].data = s.Deserialize<T>(jr);
-                jr.Close();
+                JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(pValue));
+                entries[pRow].data = jsonSerializer.Deserialize<T>(jsonTextReader);
+                jsonTextReader.Close();
             }
         }
 		
