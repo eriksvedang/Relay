@@ -15,7 +15,7 @@ namespace RelayLib
     public class RelayTwo
     {
         public SerializableDictionary<string, TableTwo> tables = new SerializableDictionary<string, TableTwo>();
-     
+
         public RelayTwo()
         { 
 
@@ -29,8 +29,7 @@ namespace RelayLib
         public TableTwo CreateTable(string pTableName)
         {
 #if DEBUG
-            if (tables.ContainsKey(pTableName))
-            {
+            if (tables.ContainsKey(pTableName)) {
                 throw new RelayException("Database already contains a table with name " + pTableName);
             }
 #endif
@@ -38,18 +37,17 @@ namespace RelayLib
             tables.Add(pTableName, newTable);
             return newTable;
         }
-     
+
         public TableTwo GetTable(string pTableName)
         {
 #if DEBUG
-            if (!tables.ContainsKey(pTableName))
-            {
+            if (!tables.ContainsKey(pTableName)) {
                 throw new RelayException("Can't find table with name " + pTableName);
             }
 #endif
             return tables[pTableName];            
         }
-     
+
         IEnumerable<float> Save(string pFilename)
         {
             FileStream f = new FileStream(pFilename, FileMode.Create);
@@ -73,13 +71,13 @@ namespace RelayLib
             tw.Dispose();
             f.Dispose();
         }
-     
+
         public void SaveAll(string pFilename)
         {
             foreach (float f in Save(pFilename))
                 ;
         }
-     
+
         public void SaveTableSubsetSeparately(string pTableName, string pSaveFilePath)
         {
             RelayTwo subset = Subset(pTableName, (o => true));
@@ -226,7 +224,7 @@ namespace RelayLib
             foreach (String tableName in additiveRelay.tables.Keys) {
                 TableTwo fromTable = additiveRelay.tables[tableName];
                 // If the table already exists, append the entries from the new table.
-                if (tables.ContainsKey(tableName)) {
+                if (this.tables.ContainsKey(tableName)) {
                     TableTwo toTable = tables[tableName];
                     // Ensure that all fields exists in the old table.
                     foreach (ITableField f in fromTable.fields) {
@@ -240,13 +238,12 @@ namespace RelayLib
                             toField.SetValueFromString(toRow.row, fromField.GetValueAsString(fromRow.row));
                         }
                     }
-                }
-                else {
+                } else {
                     this.tables[fromTable.name] = fromTable;
                 }
             }
         }
-     
+
         /// <summary>
         /// Append all entries in all tables, source IDs will be discarded.
         /// </summary>
@@ -284,7 +281,7 @@ namespace RelayLib
             {
             }
         }
-   
+
         public void MergeWith(RelayTwo pSource)
         {
             foreach (TableTwo targetTable in tables.Values) {
@@ -338,7 +335,7 @@ namespace RelayLib
                 }
             }
         }
-     
+
         public override bool Equals(object obj)
         {
             RelayTwo r = obj as RelayTwo;
@@ -350,7 +347,7 @@ namespace RelayLib
             }
             return true;
         }
-     
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
